@@ -6,6 +6,7 @@ import hiber.model.User;
 import hiber.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
@@ -37,6 +38,8 @@ public class MainApp {
             System.out.println();
         }
 
+
         context.close();
     }
+
 }

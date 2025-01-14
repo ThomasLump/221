@@ -24,20 +24,16 @@ public class UserDaoImp implements UserDao {
     @Override
     @SuppressWarnings("unchecked")
     public List<User> listUsers() {
-        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
-        return query.getResultList();
+        return sessionFactory.getCurrentSession().createQuery("from User").getResultList();
     }
 
     @Override
-    public Optional<User> getUserByCar(String model, int series) {
-        TypedQuery<User> query = sessionFactory.getCurrentSession()
+    public User getUserByCarWhereModelAndSeries(String model, int series) {
+        return sessionFactory.getCurrentSession()
                 .createQuery("select u from User u join u.car c where c.model=:model and c.series=:series", User.class)
                 .setParameter("model", model)
-                .setParameter("series", series);
-        List<User> result = query.getResultList();
-        //я так понял что машина и пользователь уникальны и результат будет бинарным
-        // - либо есть одно совпадение, либо нет совпадений вообще
-        return result.size() == 1 ? Optional.of(result.getFirst()) : Optional.empty();
+                .setParameter("series", series)
+                .getSingleResult();
     }
 
 }

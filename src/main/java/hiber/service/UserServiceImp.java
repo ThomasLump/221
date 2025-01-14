@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImp implements UserService {
@@ -30,8 +29,7 @@ public class UserServiceImp implements UserService {
 
    @Transactional(readOnly = true)
    public User findUserByCar(String model, int series) {
-      //по задумке я выбрасываю анчекд чтобы откатить транзакцию
-      return userDao.getUserByCar(model, series).orElseThrow(EntityNotFoundException::new);
+      return userDao.getUserByCarWhereModelAndSeries(model, series);
    }
 
 }

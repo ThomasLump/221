@@ -16,7 +16,8 @@ public class Car {
     @Column(name = "series")
     private int series;
 
-    @OneToOne(mappedBy = "car")
+    @OneToOne( mappedBy = "car")
+    //@JoinColumn(name = "user", referencedColumnName = "id")
     private User user;
 
     public Car() {}
